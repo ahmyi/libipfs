@@ -42,18 +42,18 @@ jobs:
           go-version: '1.14'
       
       - name: Install dependencies for macOS build
-        if: ${{ matrix.os == 'macos-latest' }}
+        if: ${{ matrix.os == 'macos-11' }}
         run: |
           go mod download
       - name: Build and package artifacts for macOS build
-        if: ${{ matrix.os == 'macos-latest' }}
+        if: ${{ matrix.os == 'macos-11' }}
         run: |
           make build_macos_x64
           mkdir libipfs${{ github.event.release.tag_name }}-macOS-x64/
           cp -rf ./bin/libipfs-mac* libipfs${{ github.event.release.tag_name }}-macOS-x64/
           zip -r libipfs${{ github.event.release.tag_name }}-macOS-x64.zip libipfs${{ github.event.release.tag_name }}-macOS-x64/
       - name: Upload macOS build artifacts
-        if: ${{ matrix.os == 'macos-latest' }}
+        if: ${{ matrix.os == 'macos-11' }}
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ github.token }}
